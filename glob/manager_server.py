@@ -249,7 +249,12 @@ def get_model_dir(data):
 
 def get_model_path(data):
     base_model = get_model_dir(data)
-    return os.path.join(base_model, data['filename'])
+
+    # Path replacement logic
+    if base_model.startswith("/home/ubuntu/ComfyUI/models/"):
+        base_model = base_model.replace("/home/ubuntu/ComfyUI/models/", "/home/ubuntu/user_data/comfyui/models/")
+
+    return os.path.join(base_model, data['filename']) 
 
 
 def check_custom_nodes_installed(json_obj, do_fetch=False, do_update_check=True, do_update=False):
